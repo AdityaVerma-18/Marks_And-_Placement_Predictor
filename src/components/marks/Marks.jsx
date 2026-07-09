@@ -74,26 +74,26 @@ function Marks() {
 
   const [study, setStudy] = useState(0)
   const [attendance, setAttendance] = useState(0)
-  const [mental, setMental] = useState(0)
+  const [mental, setMental] = useState(1)
   const [sleep, setSleep] = useState(0)
   const [prediction, setPrediction] = useState("");
- const handleSubmit = () => {
-  axios
-    .post("http://127.0.0.1:5000/predict2", {
-      study,
-      attendance,
-      mental,
-      sleep,
-      parttime: parttime.value,
-    })
-    .then((response) => {
-      setPrediction(response.data.prediction);
-    })
-    .catch((error) => {
-      console.error(error);
-      setPrediction("Error connecting to server");
-    });
-};
+  const handleSubmit = () => {
+    axios
+      .post("http://127.0.0.1:5000/predict2", {
+        study,
+        attendance,
+        mental,
+        sleep,
+        parttime: parttime.value,
+      })
+      .then((response) => {
+        setPrediction(response.data.prediction);
+      })
+      .catch((error) => {
+        console.error(error);
+        setPrediction("Error connecting to server");
+      });
+  };
 
   return (
     <main className="marks-card">
@@ -118,7 +118,6 @@ function Marks() {
             onChange={(e) => { setStudy(e.target.value) }}
             min="0"
             max="24"
-            defaultValue="0"
           />
 
 
@@ -136,7 +135,7 @@ function Marks() {
             max="100"
             value={attendance}
             onChange={(e) => { setAttendance(e.target.value) }}
-            defaultValue="0" />
+          />
 
         </div>
 
@@ -152,7 +151,7 @@ function Marks() {
             max="10"
             value={mental}
             onChange={(e) => { setMental(e.target.value) }}
-            defaultValue="1" />
+          />
 
 
         </div>
@@ -169,7 +168,7 @@ function Marks() {
             max="24"
             value={sleep}
             onChange={(e) => { setSleep(e.target.value) }}
-            defaultValue="0" />
+          />
 
 
         </div>
